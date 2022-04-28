@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Gilroy'),
       title: 'BMI CALCULATOR',
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),

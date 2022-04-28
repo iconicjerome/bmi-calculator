@@ -17,30 +17,73 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffffffefc8b1),
       appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          'BMI CALCULATOR',
+          style: TextStyle(color: Color(0xff514644)),
+        ),
         backgroundColor: Colors.transparent,
       ),
       body: Center(
         child: Column(
           children: [
             SizedBox(
-              height: 20,
+              height: 50,
             ),
-            Text('HEIGHT'),
-            TextField(
-              controller: heightcontroller,
-              keyboardType: TextInputType.number,
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    width: 130,
+                    child: TextField(
+                      cursorColor: Color(0xff514644),
+                      style: TextStyle(color: Color(0xff514644)),
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                          hintText: 'HEIGHT (m)',
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xff514644))),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Color(0xff514644)))),
+                      controller: heightcontroller,
+                      keyboardType: TextInputType.number,
+                    ),
+                  ),
+                  Container(
+                    width: 130,
+                    child: TextField(
+                        cursorColor: Color(0xff514644),
+                        style: TextStyle(color: Color(0xff514644)),
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                            hintText: 'MASS (kg)',
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xff514644))),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xff514644)))),
+                        controller: masscontroller,
+                        keyboardType: TextInputType.number),
+                  ),
+                ],
+              ),
             ),
-            Text('MASS'),
-            TextField(
-                controller: masscontroller, keyboardType: TextInputType.number),
             SizedBox(
               height: 20,
             ),
             ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Color(0xff6b705c))),
                 onPressed: () {
                   setState(() {
+                    /* create variable (height and mass); pass the controllers into the variales (remember to add .text at the end and then change it to double by using the double.parse method) */
                     dynamic height = double.parse(heightcontroller.text);
                     dynamic mass = double.parse(masscontroller.text);
 
@@ -57,19 +100,30 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                   });
                 },
-                child: Text('Calulate')),
+                child: Text(
+                  'Calulate',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
             SizedBox(
               height: 20,
             ),
-            Container(
-              child: Column(
-                children: [
-                  Text(bmi_result.toString()),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(textResult),
-                ],
+            /*use visibility to hide widgets till a condition is met */
+            Visibility(
+              visible: textResult.isNotEmpty,
+              child: Container(
+                child: Column(
+                  children: [
+                    Text(bmi_result.toString(),
+                        style: TextStyle(color: Color(0xff514644))),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      textResult,
+                      style: TextStyle(color: Color(0xff514644)),
+                    ),
+                  ],
+                ),
               ),
             )
           ],
